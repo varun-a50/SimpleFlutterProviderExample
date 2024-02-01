@@ -1,16 +1,33 @@
-# flutterproviderdemo
+This has only 3 pages to demonstrate simple provider use.
 
-A new Flutter project.
+just imp part of code....
 
-## Getting Started
+counter_model.dart
+import 'package:flutter/material.dart';
 
-This project is a starting point for a Flutter application.
+class CounterModel extends ChangeNotifier {
+  int _count = 0;
+  int get count => _count;
 
-A few resources to get you started if this is your first Flutter project:
+  void increment() {
+    _count++;
+    notifyListeners();
+  }
+}
+===========================================
+home_page.dart
+ return Consumer<CounterModel>(
+        builder: (context, value, child) => Scaffold(
+              appBar: AppBar(
+==========================================
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+main.dart
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CounterModel(),
+      child: const MyApp(),
+    ),
+  );
+}
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
